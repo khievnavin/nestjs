@@ -1,5 +1,13 @@
 {
   "singleQuote": true,
+  "jsxSingleQuote": true,
   "trailingComma": "all",
-  "endOfLine": "lf"
+  "printWidth": 80,
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "overrides": [
+    {
+      "files": ["**/*.tsx"]
+    }
+  ],
+  "endOfLine": "crlf"
 }
