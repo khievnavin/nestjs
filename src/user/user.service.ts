@@ -12,7 +12,7 @@ export class UserService {
         where: {
             id: userId,
           },
-          data: {
+        data: {
             ...dto,
           },
         });

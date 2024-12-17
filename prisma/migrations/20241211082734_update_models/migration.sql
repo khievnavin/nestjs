@@ -32,7 +32,7 @@ CREATE TABLE "bookmarks" (
     "title" TEXT NOT NULL,
     "description" TEXT,
     "link" TEXT NOT NULL,
-    "userID" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "bookmarks_pkey" PRIMARY KEY ("id")
 );
@@ -44,4 +44,4 @@ CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 CREATE UNIQUE INDEX "users_hash_key" ON "users"("hash");
 
 -- AddForeignKey
-ALTER TABLE "bookmarks" ADD CONSTRAINT "bookmarks_userID_fkey" FOREIGN KEY ("userID") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "bookmarks" ADD CONSTRAINT "bookmarks_userID_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
