@@ -39,12 +39,12 @@ export class BookmarkController {
         return this.bookmarkService.editBookmarkById(userId.id , bookmarkId, dto);
     }
 
-    @HttpCode(HttpStatus.NO_CONTENT)
+    // @HttpCode(HttpStatus.NO_CONTENT)
     @Delete(':id')
     deleteBookmarkById(
-        @GetUser('id') userId: number, 
+        @GetUser('id') userId: User, 
         @Param('id', ParseIntPipe) bookmarkId: number) {
-        return this.bookmarkService.deleteBookmarkById(userId, bookmarkId);
+        return this.bookmarkService.deleteBookmarkById(userId.id, bookmarkId);
     }
 
 }

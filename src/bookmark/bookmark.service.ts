@@ -8,13 +8,24 @@ export class BookmarkService {
     constructor(private prisma: PrismaService){}
     
     async getBookmarks(userId: number) {
-        console.log('user id: ',userId);
         
-      return await this.prisma.bookmark.findMany({
-            where: {
-                id: userId
-            },
-        });
+      const bookmarks = await this.prisma.bookmark.findMany({
+        where: {
+          userId
+        },
+        orderBy: {
+          id: 'asc', // Can be 'asc' or 'desc'
+        },
+        select: {
+          id: true,
+          title: true,
+          link: true,
+          description: true,
+          // Do not include fields like createdAt, userId, etc.
+        },
+    });
+    console.log('Fetched Bookmarks:', bookmarks);
+    return bookmarks;
     }
 
     getBookmarkById(userId: number, bookmarkId: number) {
@@ -22,6 +33,13 @@ export class BookmarkService {
             where: {
                 id: bookmarkId,
                 userId
+            },
+            select: {
+              id: true,
+              title: true,
+              link: true,
+              description: true,
+              // Do not include fields like createdAt, userId, etc.
             },
         })
      }
@@ -37,8 +55,11 @@ export class BookmarkService {
               ...dto,
             },
           });
-    
-        return bookmark;
+          
+        return {
+          message: 'Bookmark created successfully!',
+          bookmark
+        }
     }
 
     async editBookmarkById(userId: number,bookmarkId: number, dto: EditBookmarkDto) {
@@ -78,6 +99,9 @@ export class BookmarkService {
           id: bookmarkId
         },
       });
+      return {
+        message: 'Bookmark deleted successfully!'
+      }
     }
 
 }
