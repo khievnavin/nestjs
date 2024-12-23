@@ -1,2 +1,2 @@
-export * from './jwt.guard'
-export * from './Hash'
+export * from './jwt.guard';
+export * from './Hash';

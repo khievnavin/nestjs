@@ -6,6 +6,6 @@ import { PassportModule } from '@nestjs/passport';
 @Module({
   imports: [PassportModule],
   controllers: [UserController],
-  providers: [UserService]
+  providers: [UserService],
 })
 export class UserModule {}

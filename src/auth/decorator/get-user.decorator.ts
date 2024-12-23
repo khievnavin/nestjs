@@ -1,4 +1,4 @@
-    import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
 export const GetUser = createParamDecorator(
   (data: unknown, ctx: ExecutionContext) => {
@@ -6,4 +6,3 @@ export const GetUser = createParamDecorator(
     return request.user;
   },
 );
- 
