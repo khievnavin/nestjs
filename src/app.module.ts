@@ -5,6 +5,8 @@ import { BookmarkModule } from './bookmark/bookmark.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
+import { FileModule } from './file/file.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { PassportModule } from '@nestjs/passport';
     BookmarkModule,
     PrismaModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
+    FileModule,
+    MulterModule.register({ dest: '/upload' }),
   ],
 })
 export class AppModule {}

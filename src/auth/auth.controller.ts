@@ -24,7 +24,6 @@ export class AuthController {
     @Req() request: RequestWithUser,
     @Body() refreshTokendto: RefreshTokenDto,
   ) {
-    console.log('Request User:', request.user); // Debug log
     return this.authService.refreshToken(request, refreshTokendto);
   }
 }
