@@ -4,12 +4,14 @@ import { UserModule } from './user/user.module';
 import { BookmarkModule } from './bookmark/bookmark.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [AuthModule, 
           ConfigModule.forRoot({isGlobal:true}), 
           UserModule, 
           BookmarkModule, 
-          PrismaModule]
+          PrismaModule,
+          PassportModule.register({ defaultStrategy: 'jwt' }),]
 })
 export class AppModule {}
