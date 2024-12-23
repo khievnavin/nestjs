@@ -7,11 +7,13 @@ import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 
 @Module({
-  imports: [AuthModule, 
-          ConfigModule.forRoot({isGlobal:true}), 
-          UserModule, 
-          BookmarkModule, 
-          PrismaModule,
-          PassportModule.register({ defaultStrategy: 'jwt' }),]
+  imports: [
+    AuthModule,
+    ConfigModule.forRoot({ isGlobal: true }),
+    UserModule,
+    BookmarkModule,
+    PrismaModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+  ],
 })
 export class AppModule {}
