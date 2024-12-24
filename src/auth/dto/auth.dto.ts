@@ -17,12 +17,4 @@ export class AuthDto {
   @IsString()
   @IsNotEmpty()
   password: string;
-
-  // @ApiProperty({
-  //     example: '1234578910',
-  //     required: true
-  //  })
-  // @IsString()
-  // @IsNotEmpty()
-  // refreshToken: string;
 }

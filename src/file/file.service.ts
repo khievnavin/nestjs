@@ -14,8 +14,10 @@ export class FileService {
     }
   }
 
-  async getAllFiles() {
-    const files = await this.prisma.file.findMany();
+  async getAllFiles(userId: number) {
+    const files = await this.prisma.file.findMany({
+      where: { id: userId }, // Only fetch files that belong to the user
+    });
     const filesWithUrls = files.map((file) => ({
       ...file,
       url: `${'DATABASE_URL'}/${file.storedName}`,
@@ -45,7 +47,7 @@ export class FileService {
 
     return fs.createReadStream(filePath);
   }
-  async saveFiles(files: Express.Multer.File[]) {
+  async saveFiles(files: Express.Multer.File[], userId: number) {
     if (!files || files.length === 0) {
       throw new BadRequestException('No files provided');
     }
@@ -55,21 +57,20 @@ export class FileService {
         const storedName = `${Date.now()}-${file.originalname}`;
         const filePath = path.join(this.uploadPath, storedName);
 
-        // Save the file to the file system
         fs.writeFileSync(filePath, file.buffer);
 
-        // Save file metadata to the database
         return this.prisma.file.create({
           data: {
             originalName: file.originalname,
             storedName,
             mimeType: file.mimetype,
             size: file.size,
+            userId,
           },
         });
       }),
     );
-    console.log('Fetched Files:', files);
+    console.log('Files saved:', savedFiles);
     return {
       message: `${files.length} files uploaded successfully.`,
       files: savedFiles,

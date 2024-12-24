@@ -26,6 +26,8 @@ model User{
   lastName  String?
 
   bookmarks Bookmark[]
+  
+  files File[]
 
   @@map("users")
 }
@@ -50,6 +52,9 @@ model File {
   mimeType    String   @db.VarChar(100)
   size        Int
   uploadedAt  DateTime @default(now())
+
+  userId      Int?
+  user        User? @relation(fields: [userId], references: [id])
 
   @@map("files")
 }
