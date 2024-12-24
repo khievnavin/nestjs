@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { FileModule } from './file/file.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { PrismaService } from './prisma/prisma.service';
 
 @Module({
   imports: [
@@ -19,5 +20,6 @@ import { MulterModule } from '@nestjs/platform-express';
     FileModule,
     MulterModule.register({ dest: '/upload' }),
   ],
+  providers: [PrismaService],
 })
 export class AppModule {}

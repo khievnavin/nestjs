@@ -42,3 +42,14 @@ model Bookmark {
 
   @@map("bookmarks")
 }
+
+model File {
+  id          Int      @id @default(autoincrement())
+  originalName String   @db.VarChar(255)
+  storedName  String   @db.VarChar(255)
+  mimeType    String   @db.VarChar(100)
+  size        Int
+  uploadedAt  DateTime @default(now())
+
+  @@map("files")
+}
